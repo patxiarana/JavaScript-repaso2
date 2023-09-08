@@ -102,14 +102,32 @@ evento.preventDefault()
 // Validar el formulario 
 const {nombre, email , mensaje} = datos;
 if(nombre === '' || email === '' || mensaje === ''){
-    mostrarError('complete todos los campos')
+    mostrarAlerta('complete todos los campos',true)
     return 
 }
-messageSucces('formulario enviado')
+mostrarAlerta('formulario enviado')
 return 
 })
 
 //Mostrar Alerta de que se envio correctamente
+
+function mostrarAlerta(message, error = null){
+    const alerta = document.createElement('P');
+    alerta.textContent  = message
+    if(error == null){
+        alerta.classList.add('succes') ; 
+        formulario.appendChild(alerta)
+    }  else {
+        alerta.classList.add('error') ; 
+        formulario.appendChild(alerta)
+    }
+    
+   setTimeout(()=> {
+    alerta.remove();
+   }, 5000)
+}
+
+/*
 function messageSucces(message){
     const succes = document.createElement('P');
     succes.textContent  = message
@@ -135,6 +153,6 @@ function mostrarError(message) {
    setTimeout(()=> {
     error.remove();
    }, 5000)
-}
+}  */
 // Enviar el formulario 
 
