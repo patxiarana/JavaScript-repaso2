@@ -62,12 +62,14 @@ console.log(5) */
 
 // Seleccionar Elementos y asociarles un evento 
 
+/*
 const btnEnviar = document.querySelector('.boton--primario')
 btnEnviar.addEventListener('click', function(evento){
 console.log(evento)
 console.log(evento.preventDefault())
     console.log('enviando formulario')
-})
+}) */
+
 
 // Eventos de los inputs text area 
 
@@ -92,3 +94,47 @@ function leerTexto(e) {
     datos[e.target.id] = e.target.value ;
     console.log(datos)
 }
+
+// Evento submit 
+const formulario = document.querySelector('.formulario')
+formulario.addEventListener('submit', function(evento){
+evento.preventDefault()
+// Validar el formulario 
+const {nombre, email , mensaje} = datos;
+if(nombre === '' || email === '' || mensaje === ''){
+    mostrarError('complete todos los campos')
+    return 
+}
+messageSucces('formulario enviado')
+return 
+})
+
+//Mostrar Alerta de que se envio correctamente
+function messageSucces(message){
+    const succes = document.createElement('P');
+    succes.textContent  = message
+    succes.classList.add('succes') ; 
+   formulario.appendChild(succes)
+   //Desaparesca despues de 5 segundos 
+
+   setTimeout(()=> {
+    succes.remove();
+   }, 5000)
+}
+
+
+// Muestra un error en pantalla 
+
+function mostrarError(message) { 
+    const error = document.createElement('P');
+    error.textContent  = message
+    error.classList.add('error') ; 
+   formulario.appendChild(error)
+   //Desaparesca despues de 5 segundos 
+
+   setTimeout(()=> {
+    error.remove();
+   }, 5000)
+}
+// Enviar el formulario 
+
